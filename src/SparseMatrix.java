@@ -12,7 +12,15 @@ public class SparseMatrix {
     }
 
     public void insert(int row, int column, int value) {
+        ValueNode newNode = new ValueNode(row, column, value);
+        //they have get methods that return their position
+        MatrixRow assignedRow = firstRow;
+        MatrixColumn assignedColumn = firstColumn;
 
+        // get corresponding matrix row
+        for (int i = 1; i < row; i++){
+            assignedRow = assignedRow.getNext();
+        }
     }
 
     public MatrixRow getRow(int position) {

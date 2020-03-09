@@ -15,24 +15,52 @@ public class MatrixRow {
         this.next = next;
     }
 
+    // sparseMatrix is going to fetch corresponding row, then will pass value node here.
+    // from here, set corresponding column by going through all rows up to column number
     public void insert(ValueNode value) {
-        //TODO: insert in sorted order
         ValueNode current = first;
-        while (current.getNextRow() != null){
-            current = current.getNextRow();
+        ValueNode prev;
+        int targetColumn = value.getColumn();
+
+        // case 1: this is the first node
+        if (first == null){
+            first = value;
+            return;
         }
-        current.setNextRow(value);
+
+        // case 2: the node has smallest column value in column
+        if (first.getColumn() > targetColumn){
+            // make value the first
+            value.setNextColumn(first); // or current, shouldn't matter?
+            first = value;
+            return;
+        }
+
+        // case 3: stop when current is bigger, prev is smaller, and put val in between
+        while (current.getNextColumn() != null){
+            prev = current;
+            current = current.getNextColumn();
+            if (current.getColumn() > targetColumn){
+                // put value in between prev and current
+                value.setNextColumn(current);
+                prev.setNextColumn(value);
+                return;
+            }
+        }
+
+        // case 3 b: the end of the list has been reached, thus toInsert has largest column value
+        current.setNextColumn(value);
     }
 
     public int get(int position) {
-        int count = 0;
+        // travel down until you hit specified valuenode (if it exists)
         ValueNode current = first;
-        while (current != null){
-            current = current.getNextRow();
-            count += 1;
-            if (count == position){
-                return current.getValue();
-            }
+        // get the node that's closest or equal to desired position
+        while (current.getColumn() < position){
+            current = current.getNextColumn();
+        }
+        if (current.getColumn() == position){
+            return current.getValue();
         }
         //if nothing is found, return 0
         return 0;
