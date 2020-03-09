@@ -57,8 +57,9 @@ public class MatrixColumn {
             current = current.getNextRow();
         }
         if (current.getRow() == position){
-
+            return current.getValue();
         }
+        // doesn't exist, so return 0
         return 0;
     }
 

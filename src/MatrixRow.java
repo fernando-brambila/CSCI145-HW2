@@ -1,3 +1,5 @@
+import com.sun.jdi.Value;
+
 public class MatrixRow {
     private ValueNode first;
     private MatrixRow next;
@@ -24,6 +26,7 @@ public class MatrixRow {
 
         // case 1: this is the first node
         if (first == null){
+            System.out.println("Inserted " + value.getValue() + " as first");
             first = value;
             return;
         }
@@ -31,6 +34,7 @@ public class MatrixRow {
         // case 2: the node has smallest column value in column
         if (first.getColumn() > targetColumn){
             // make value the first
+            System.out.println("Inserted " + value.getValue() + " to beginning");
             value.setNextColumn(first); // or current, shouldn't matter?
             first = value;
             return;
@@ -42,28 +46,47 @@ public class MatrixRow {
             current = current.getNextColumn();
             if (current.getColumn() > targetColumn){
                 // put value in between prev and current
+                System.out.println("Inserted " + value.getValue() + " in between");
                 value.setNextColumn(current);
                 prev.setNextColumn(value);
                 return;
             }
         }
-
+        System.out.println("Inserted " + value.getValue() + " to last");
         // case 3 b: the end of the list has been reached, thus toInsert has largest column value
         current.setNextColumn(value);
     }
 
     public int get(int position) {
-        // travel down until you hit specified valuenode (if it exists)
+        // case where first node is desired position
         ValueNode current = first;
-        // get the node that's closest or equal to desired position
-        while (current.getColumn() < position){
+        if (first != null && first.getColumn() == position){
+            return first.getValue();
+        }
+        // iterate through nodes until it equals position
+        // but it passes it and column > position, it doesn't exist
+        while (current.getNextColumn() != null){
+            current = current.getNextColumn();
+            if (current.getColumn() == position){
+                return current.getValue();
+            }
+            if (current.getColumn() > position){
+                System.out.println("is too high");
+                return 0;
+            }
+        }
+        // case where only one node exists, or position is too high
+        return 0;
+    }
+
+    public void testPrint(){
+        System.out.println("Printing MatrixRow content:");
+        ValueNode current = first;
+        while (current.getNextColumn() != null){
+            System.out.println(current.getValue());
             current = current.getNextColumn();
         }
-        if (current.getColumn() == position){
-            return current.getValue();
-        }
-        //if nothing is found, return 0
-        return 0;
+        System.out.println(current.getValue());
     }
 
 }
