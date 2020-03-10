@@ -26,7 +26,7 @@ public class MatrixRow {
 
         // case 1: this is the first node
         if (first == null){
-            System.out.println("Inserted " + value.getValue() + " as first");
+            //System.out.println("Inserted " + value.getValue() + " as first");
             first = value;
             return;
         }
@@ -34,7 +34,7 @@ public class MatrixRow {
         // case 2: the node has smallest column value in column
         if (first.getColumn() > targetColumn){
             // make value the first
-            System.out.println("Inserted " + value.getValue() + " to beginning");
+            //System.out.println("Inserted " + value.getValue() + " to beginning");
             value.setNextColumn(first); // or current, shouldn't matter?
             first = value;
             return;
@@ -46,13 +46,13 @@ public class MatrixRow {
             current = current.getNextColumn();
             if (current.getColumn() > targetColumn){
                 // put value in between prev and current
-                System.out.println("Inserted " + value.getValue() + " in between");
+                //System.out.println("Inserted " + value.getValue() + " in between");
                 value.setNextColumn(current);
                 prev.setNextColumn(value);
                 return;
             }
         }
-        System.out.println("Inserted " + value.getValue() + " to last");
+        //System.out.println("Inserted " + value.getValue() + " to last");
         // case 3 b: the end of the list has been reached, thus toInsert has largest column value
         current.setNextColumn(value);
     }
@@ -60,6 +60,10 @@ public class MatrixRow {
     public int get(int position) {
         // case where first node is desired position
         ValueNode current = first;
+        if (first == null){
+            //System.out.println("First item in MatrixRow doesn't exist");
+            return 0;
+        }
         if (first != null && first.getColumn() == position){
             return first.getValue();
         }
@@ -67,17 +71,17 @@ public class MatrixRow {
         // but it passes it and column > position, it doesn't exist
         while (current.getNextColumn() != null){
             current = current.getNextColumn();
-            System.out.println("Current column: " + current.getColumn());
+            //System.out.println("Current column: " + current.getColumn());
             if (current.getColumn() == position){
                 return current.getValue();
             }
             if (current.getColumn() > position){
-                System.out.println("missed my stop");
+                //System.out.println("missed my stop");
                 return 0;
             }
         }
         // case where only one node exists, or position is too high
-        System.out.println("end case, only node or too high");
+        //System.out.println("end case, only node or too high");
         return 0;
     }
 

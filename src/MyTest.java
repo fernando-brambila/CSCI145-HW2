@@ -39,7 +39,22 @@ public class MyTest {
         int testVal2 = testColumn.get(2);
         System.out.println("The 2nd get of testRow is:\n\t" + testVal);
         System.out.println("The 2nd get of testColumn is:\n\t" + testVal2);
+        System.out.println();
 
+        // test: make a sparse matrix
+
+        SparseMatrix testMatrix = new SparseMatrix(5, 4);
+        testMatrix.insert(1, 1, 1);
+        testMatrix.insert(2, 1, 2);
+        testMatrix.insert(3, 2, 3);
+        testMatrix.insert(4, 3, 4);
+        testMatrix.insert(4, 4, 5);
+        testMatrix.print();
+
+        // test: transposed matrix from testMatrix
+
+        SparseMatrix testTransposedMatrix = testMatrix.transpose();
+        testTransposedMatrix.print();
     }
 
 }

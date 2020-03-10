@@ -53,6 +53,9 @@ public class MatrixColumn {
     public int get(int position) {
         // case: first node is solution
         ValueNode current = first;
+        if (first == null){
+            return 0;
+        }
         if (first != null && first.getRow() == position){
             return first.getValue();
         }
