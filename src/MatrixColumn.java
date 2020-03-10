@@ -51,16 +51,32 @@ public class MatrixColumn {
     }
 
     public int get(int position) {
-        // travel right until you hit specified valuenode (if it exists)
+        // case: first node is solution
         ValueNode current = first;
-        while (current.getRow() < position){
+        if (first != null && first.getRow() == position){
+            return first.getValue();
+        }
+        // case: not first node, go through all nodes and compare row value to position
+        while (current.getNextRow() != null){
+            current = current.getNextRow();
+            if (current.getRow() == position){
+                return current.getValue();
+            }
+            if (current.getRow() > position){
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    public void testPrint(){
+        System.out.println("Printing MatrixColumn content:");
+        ValueNode current = first;
+        while (current.getNextRow() != null){
+            System.out.println("\t Col:" + current.getRow() + " | Val:" + current.getValue() + " | " + current.hashCode());
             current = current.getNextRow();
         }
-        if (current.getRow() == position){
-            return current.getValue();
-        }
-        // doesn't exist, so return 0
-        return 0;
+        System.out.println("\t Col:" + current.getRow() + " | Val:" + current.getValue() + " | " + current.hashCode());
     }
 
 }

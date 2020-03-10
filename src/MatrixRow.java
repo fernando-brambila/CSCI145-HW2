@@ -1,5 +1,5 @@
 import com.sun.jdi.Value;
-
+//TODO: remove debug souts
 public class MatrixRow {
     private ValueNode first;
     private MatrixRow next;
@@ -85,10 +85,10 @@ public class MatrixRow {
         System.out.println("Printing MatrixRow content:");
         ValueNode current = first;
         while (current.getNextColumn() != null){
-            System.out.println("\t" + current.getValue());
+            System.out.println("\t Col:" + current.getColumn() + " | Val:" + current.getValue() + " | " + current.hashCode());
             current = current.getNextColumn();
         }
-        System.out.println("\t" + current.getValue());
+        System.out.println("\t Col:" + current.getColumn() + " | Val:" + current.getValue() + " | " + current.hashCode());
     }
 
 }
