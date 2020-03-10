@@ -148,6 +148,7 @@ public class SparseMatrix {
         }
         // case: last row
         // go through all nodes in this row and insert to transposed
+        if (currentNode != null) {
         while (currentNode.getNextColumn() != null) {
             int nodeRow = currentNode.getColumn();
             int nodeColumn = currentNode.getRow();
@@ -156,10 +157,12 @@ public class SparseMatrix {
             currentNode = currentNode.getNextColumn();
         }
         // case: last node in row
-        int nodeRow = currentNode.getColumn();
-        int nodeColumn = currentNode.getRow();
-        int nodeValue = currentNode.getValue();
-        transposedMatrix.insert(nodeRow, nodeColumn, nodeValue);
+
+            int nodeRow = currentNode.getColumn();
+            int nodeColumn = currentNode.getRow();
+            int nodeValue = currentNode.getValue();
+            transposedMatrix.insert(nodeRow, nodeColumn, nodeValue);
+        }
 
         return transposedMatrix;
     }

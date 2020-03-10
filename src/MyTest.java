@@ -70,12 +70,12 @@ public class MyTest {
 
         // test: product of matrices with different dimensions
         SparseMatrix m1 = new SparseMatrix(2, 3);
-        testMatrix.insert(1, 1, 1);
-        testMatrix.insert(1, 2, 2);
-        testMatrix.insert(1, 3, 3);
-        testMatrix.insert(2, 1, 4);
-        testMatrix.insert(2, 2, 5);
-        testMatrix.insert(2, 3, 6);
+        m1.insert(1, 1, 1);
+        m1.insert(1, 2, 2);
+        m1.insert(1, 3, 3);
+        m1.insert(2, 1, 4);
+        m1.insert(2, 2, 5);
+        m1.insert(2, 3, 6);
 
         SparseMatrix m2 = m1.transpose();
 
