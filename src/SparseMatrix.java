@@ -102,7 +102,17 @@ public class SparseMatrix {
         System.out.println();
     }
 
+    public int getTotalRows(){
+        return totalRows;
+    }
+
+    public int getTotalColumns(){
+        return totalColumns;
+    }
+
     public SparseMatrix transpose() {
+        // TODO: write better while loops
+
         int newRows = totalColumns;
         int newColumns = totalRows;
         SparseMatrix transposedMatrix = new SparseMatrix(newRows, newColumns);
@@ -137,12 +147,39 @@ public class SparseMatrix {
             currentNode = currentRow.getFirst();
         }
         // case: last row
-        // TODO: is last row missing ?
+        // go through all nodes in this row and insert to transposed
+        while (currentNode.getNextColumn() != null) {
+            int nodeRow = currentNode.getColumn();
+            int nodeColumn = currentNode.getRow();
+            int nodeValue = currentNode.getValue();
+            transposedMatrix.insert(nodeRow, nodeColumn, nodeValue);
+            currentNode = currentNode.getNextColumn();
+        }
+        // case: last node in row
+        int nodeRow = currentNode.getColumn();
+        int nodeColumn = currentNode.getRow();
+        int nodeValue = currentNode.getValue();
+        transposedMatrix.insert(nodeRow, nodeColumn, nodeValue);
 
         return transposedMatrix;
     }
 
     public SparseMatrix produce(SparseMatrix other) {
-        return null;
+        SparseMatrix productMatrix = new SparseMatrix(totalRows, other.getTotalColumns());
+
+        // directly implemented from assignment pseudocode
+        for (int i = 1; i <= totalRows; i++){ // total rows in matrix A
+            for (int j = 1; j <= other.getTotalColumns(); j++){ // total columns in matrix B
+                int sum = 0;
+                for (int k = 1; k <= totalColumns; k++){
+                    int toAdd = getValue(i, k) * other.getValue(k, j);
+                    sum += toAdd;
+                }
+                productMatrix.insert(i, j, sum);
+            }
+
+        }
+
+        return productMatrix;
     }
 }
