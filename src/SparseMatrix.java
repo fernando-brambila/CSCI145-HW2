@@ -38,22 +38,22 @@ public class SparseMatrix {
     }
 
     public MatrixRow getRow(int position) {
-        // traveling down
-        MatrixRow current = firstRow;
-        for (int i = 0; i < position; i++){
+        MatrixRow current = firstRow; // this offsets iteration index
+        for (int i = 0; i < position - 1; i++){
             if (current.getNext() == null){
                 System.out.println("getRow: Hit max, returning last");
                 break;
             }
             current = current.getNext();
         }
+        //System.out.println("Returning matrix row: " + current.hashCode());
         return current;
     }
 
     public MatrixColumn getColumn(int position) {
         // traveling right
         MatrixColumn current = firstColumn;
-        for (int i = 0; i < position; i++){
+        for (int i = 0; i < position - 1; i++){
             if (current.getNext() == null){
                 System.out.println("getColumn: Hit max, returning last");
                 break;

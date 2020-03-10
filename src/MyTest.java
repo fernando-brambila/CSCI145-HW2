@@ -43,12 +43,13 @@ public class MyTest {
 
         // test: make a sparse matrix
 
-        SparseMatrix testMatrix = new SparseMatrix(5, 4);
+        SparseMatrix testMatrix = new SparseMatrix(2, 3);
         testMatrix.insert(1, 1, 1);
-        testMatrix.insert(2, 1, 2);
-        testMatrix.insert(3, 2, 3);
-        testMatrix.insert(4, 3, 4);
-        testMatrix.insert(4, 4, 5);
+        testMatrix.insert(1, 2, 2);
+        testMatrix.insert(1, 3, 3);
+        testMatrix.insert(2, 1, 4);
+        testMatrix.insert(2, 2, 5);
+        testMatrix.insert(2, 3, 6);
         testMatrix.print();
 
         // test: transposed matrix from testMatrix
