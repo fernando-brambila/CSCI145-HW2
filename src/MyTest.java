@@ -86,6 +86,17 @@ public class MyTest {
         SparseMatrix m3 = m1.produce(m2);
         m3.print();
 
+        // test: matrix file reading
+        System.out.println("READ: matrixA.txt");
+        MatrixReader reader = new MatrixReader();
+        SparseMatrix readerOut = reader.read("matrixA.txt");
+        readerOut.print();
+
+        System.out.println("READ: matrixB.txt");
+        MatrixReader reader2 = new MatrixReader();
+        SparseMatrix readerOut2 = reader.read("matrixB.txt");
+        readerOut.print();
+
     }
 
 }
