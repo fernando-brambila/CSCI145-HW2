@@ -67,15 +67,17 @@ public class MatrixRow {
         // but it passes it and column > position, it doesn't exist
         while (current.getNextColumn() != null){
             current = current.getNextColumn();
+            System.out.println("Current column: " + current.getColumn());
             if (current.getColumn() == position){
                 return current.getValue();
             }
             if (current.getColumn() > position){
-                System.out.println("is too high");
+                System.out.println("missed my stop");
                 return 0;
             }
         }
         // case where only one node exists, or position is too high
+        System.out.println("end case, only node or too high");
         return 0;
     }
 
@@ -83,10 +85,10 @@ public class MatrixRow {
         System.out.println("Printing MatrixRow content:");
         ValueNode current = first;
         while (current.getNextColumn() != null){
-            System.out.println(current.getValue());
+            System.out.println("\t" + current.getValue());
             current = current.getNextColumn();
         }
-        System.out.println(current.getValue());
+        System.out.println("\t" + current.getValue());
     }
 
 }

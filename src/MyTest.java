@@ -4,14 +4,20 @@ public class MyTest {
         MatrixRow testRow = new MatrixRow();
 
         ValueNode n1 = new ValueNode(1, 1, 10);
-        ValueNode n2 = new ValueNode(2, 1, 20);
-        ValueNode n3 = new ValueNode(3, 1, 30);
+        ValueNode n2 = new ValueNode(1, 2, 20);
+        ValueNode n3 = new ValueNode(1, 3, 30);
+        ValueNode n4 = new ValueNode(1, 4, 40);
 
-        testRow.insert(n1);
-        testRow.insert(n2);
+        // test: adding to matrix row out of order
+
         testRow.insert(n3);
+        testRow.insert(n2);
+        testRow.insert(n1);
+        testRow.insert(n4);
 
-        int testVal = testRow.get(2);
+        // test: get methods on single row
+
+        int testVal = testRow.get(1);
         System.out.println(testVal);
         testRow.testPrint();
     }
